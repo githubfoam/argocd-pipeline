@@ -46,6 +46,46 @@ matrix:
       after_success:
         - deactivate
 
+# https://airflow.apache.org/docs/stable/installation.html
+    - name: "deploy Airflow 1.10.12  wo snaps on bionic(Ubuntu 18.04.4-server) amd64"
+      dist: bionic
+      arch: amd64  
+      sudo: required   
+      language: python
+      before_install:
+        - pip3 install virtualenv
+        - virtualenv -p $(which python3) ~venvpy3
+        - source ~venvpy3/bin/activate
+        - pip install -r requirements.txt
+      script:
+        - sudo apt-get update -qq
+        - sudo apt-get install -qqy build-essential
+        - pip install \
+          apache-airflow==1.10.12 \
+          --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-1.10.12/constraints-3.7.txt"      
+      after_success:
+        - deactivate
+
+# https://airflow.apache.org/docs/stable/installation.html
+    - name: "deploy Airflow 1.10.12 with extras wo snaps on bionic(Ubuntu 18.04.4-server) amd64"
+      dist: bionic
+      arch: amd64  
+      sudo: required   
+      language: python
+      before_install:
+        - pip3 install virtualenv
+        - virtualenv -p $(which python3) ~venvpy3
+        - source ~venvpy3/bin/activate
+        - pip install -r requirements.txt
+      script:
+        - sudo apt-get update -qq
+        - sudo apt-get install -qqy build-essential
+        - pip install \
+          apache-airflow[postgres,gcp]==1.10.12 \
+          --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-1.10.12/constraints-3.7.txt"
+      after_success:
+        - deactivate
+
 #     - name: "deploy argo cd  w snaps on focal amd64"
 #       dist: focal
 #       arch: amd64

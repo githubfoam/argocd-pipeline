@@ -21,7 +21,14 @@ jobs:
             source ~venvpy3/bin/activate
             pip install -r requirements.txt
           name: Create virtualenv
-
+      - run:
+          command: |
+            sudo make deploy-minikube-latest
+          name: Deploy minikube latest
+      - run:
+          command: |
+            sudo make deploy-argocd
+          name: Deploy argocd          
 workflows:
   main:
     jobs:

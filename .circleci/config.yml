@@ -11,6 +11,8 @@ jobs:
       - python/load-cache
       - python/install-deps
       - python/save-cache
+      - setup_remote_docker:
+          version: 19.03.13
       - run:
           command: |
             python -V

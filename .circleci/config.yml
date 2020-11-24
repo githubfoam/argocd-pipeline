@@ -15,6 +15,7 @@ jobs:
           command: |
             python -V
             python3 -V
+            pip3 --version
           name: Test
 
 workflows:

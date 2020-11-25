@@ -56,7 +56,9 @@ workflows:
       - schedule:
           # cron: "0 1 * * *"
           # an hourly cron job but run at minute 15 instead (i.e. 00:15, 01:15, 02:15 etc.)
-          cron: "15 * * * *"
+          # cron: "15 * * * *"
+          # cron job for every 5 minutes
+          cron: "*/5 * * * *"
           filters:
             branches:
               only: 

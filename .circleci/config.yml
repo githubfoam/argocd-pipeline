@@ -39,7 +39,7 @@ jobs:
           name: Deploy argocd
           command: |
             sudo make deploy-argocd  
-            
+
 workflows:
   version: 2
   commit-workflow:
@@ -55,10 +55,10 @@ workflows:
             branches:
               only: try-schedule-workflow
 
-    # jobs:
-    #   - build-and-test
-    #   - build-minikube
-    #   - build-argocd
+    jobs:
+      - build-and-test
+      - build-minikube
+      - build-argocd
 
 # workflows:
 #   version: 2

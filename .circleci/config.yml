@@ -4,6 +4,7 @@ orbs:
   python: circleci/python@0.2.1
 
 jobs:
+  
   build-and-test:
     executor: python/default
     steps:
@@ -14,22 +15,48 @@ jobs:
       - run:
           name: Create virtualenv
           command: |
+            python -V
+            python3 -V
+            pip3 --version
             pip3 install virtualenv
             virtualenv -p $(which python3) ~venvpy3
             source ~venvpy3/bin/activate
             pip install -r requirements.txt
-      - setup_remote_docker       
+  
+  build-minikube:
+    executor: python/default         
+    steps:
+      - setup_remote_docker        
+      - run:
+          name: Deploy minikube latest
+          command: |
+            echo "=============================deploy kubectl============================================================="
+  
+  build-argocd:
+    executor: python/default          
+    steps:
+      - run:
+          name: Deploy argocd
+          command: |
+            echo "===============================deploy argocd finished==========================================================="        
+
 workflows:
-  main:
+  version: 2
+  commit-parallel-workflow:
     jobs:
       - build-and-test
-  # the nightly workflow is configured to run every day at 12:00am UTC. 
-  # The cron key is specified using POSIX crontab syntax, see the crontab man page for cron syntax basics. 
-  nightly:
+      - build-minikube
+      - build-argocd
+  scheduled-workflow:
     triggers:
-      - schedule:
-          cron: "0 0 * * *"
+      - schedule:        
+          cron: "0,15,30,45 * * * *" # three times every hour, at minutes 0, 15, 30, 45
           filters:
             branches:
-              only:
-                - main
+              only: 
+              - dev
+
+    jobs:
+      - build-and-test
+      - build-minikube
+      - build-argocd

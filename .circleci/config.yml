@@ -38,18 +38,40 @@ jobs:
       - run:
           name: Deploy argocd
           command: |
-            sudo make deploy-argocd          
+            sudo make deploy-argocd  
+            
 workflows:
-  build-and-deploy:
+  version: 2
+  commit-workflow:
     jobs:
       - build-and-test
       - build-minikube
       - build-argocd
-  nightly:
+  scheduled-workflow:
     triggers:
       - schedule:
-          cron: "0 0 * * *"
+          cron: "0 1 * * *"
           filters:
             branches:
-              only:
-                - dev
+              only: try-schedule-workflow
+
+    # jobs:
+    #   - build-and-test
+    #   - build-minikube
+    #   - build-argocd
+
+# workflows:
+#   version: 2
+#   commit:
+#     jobs:
+#       - build-and-test
+#       - build-minikube
+#       - build-argocd
+#   nightly:
+#     triggers:
+#       - schedule:
+#           cron: "0 0 * * *"
+#           filters:
+#             branches:
+#               only:
+#                 - dev

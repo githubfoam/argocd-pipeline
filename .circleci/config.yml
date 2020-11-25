@@ -22,8 +22,9 @@ jobs:
             source ~venvpy3/bin/activate
             pip install -r requirements.txt
   build-minikube:
-    docker:
-      - image: circleci/ruby:2.4-node          
+    # docker:
+    #   - image: circleci/ruby:2.4-node 
+    executor: python/default         
     steps:
       - setup_remote_docker
         #  docker_layer_caching: true            
@@ -61,19 +62,3 @@ workflows:
       - build-and-test
       - build-minikube
       - build-argocd
-
-# workflows:
-#   version: 2
-#   commit:
-#     jobs:
-#       - build-and-test
-#       - build-minikube
-#       - build-argocd
-#   nightly:
-#     triggers:
-#       - schedule:
-#           cron: "0 0 * * *"
-#           filters:
-#             branches:
-#               only:
-#                 - dev

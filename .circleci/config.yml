@@ -30,7 +30,8 @@ jobs:
       - run:
           name: Deploy minikube latest
           command: |
-            sudo make deploy-minikube-latest          
+            echo "=============================deploy kubectl============================================================="
+            # sudo make deploy-minikube-latest          
   build-argocd:
     docker:
       - image: circleci/ruby:2.4-node          
@@ -38,7 +39,8 @@ jobs:
       - run:
           name: Deploy argocd
           command: |
-            sudo make deploy-argocd  
+            echo "===============================deploy argocd finished==========================================================="
+            # sudo make deploy-argocd  
 
 workflows:
   version: 2

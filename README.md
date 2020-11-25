@@ -2,8 +2,9 @@
 
 
 Circleci dev  branch:
-[![CircleCI](https://circleci.com/gh/githubfoam/argocd-pipeline/tree/dev.svg?style=svg)](https://circleci.com/gh/githubfoam/argocd-pipeline/tree/dev)
+[![CircleCI](https://circleci.com/gh/githubfoam/argocd-pipeline/tree/main.svg?style=svg)](https://circleci.com/gh/githubfoam/argocd-pipeline/tree/dev)
 
 ~~~~
-argocd
+https://github.com/argoproj/argo-cd/
+https://argoproj.github.io/
 ~~~~

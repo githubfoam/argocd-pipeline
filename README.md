@@ -1,7 +1,7 @@
 # argocd-pipeline
 
 
-Circleci dev  branch:
+Circleci main  branch:
 [![CircleCI](https://circleci.com/gh/githubfoam/argocd-pipeline/tree/main.svg?style=svg)](https://circleci.com/gh/githubfoam/argocd-pipeline/tree/dev)
 
 ~~~~

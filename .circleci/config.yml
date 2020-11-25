@@ -34,8 +34,9 @@ jobs:
             echo "=============================deploy kubectl============================================================="
             # sudo make deploy-minikube-latest          
   build-argocd:
-    docker:
-      - image: circleci/ruby:2.4-node          
+    # docker:
+    #   - image: circleci/ruby:2.4-node
+    executor: python/default          
     steps:
       - run:
           name: Deploy argocd
@@ -53,10 +54,13 @@ workflows:
   scheduled-workflow:
     triggers:
       - schedule:
-          cron: "0 1 * * *"
+          # cron: "0 1 * * *"
+          # an hourly cron job but run at minute 15 instead (i.e. 00:15, 01:15, 02:15 etc.)
+          cron: "15 * * * *"
           filters:
             branches:
-              only: try-schedule-workflow
+              only: 
+              - dev
 
     jobs:
       - build-and-test

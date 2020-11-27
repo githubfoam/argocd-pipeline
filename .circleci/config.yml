@@ -78,7 +78,7 @@ workflows:
       - build-and-test
       - build-minikube:
           requires:
-          - build-minikube
+          - build-and-test
   scheduled-workflow:
     triggers:
       - schedule:

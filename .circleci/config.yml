@@ -44,13 +44,41 @@ jobs:
             echo "===============================deploy argocd finished==========================================================="
             # sudo make deploy-argocd  
 
+# Parallel Jobs
+# workflows:
+#   version: 2
+#   commit-workflow:
+#     jobs:
+#       - build-and-test
+#       - build-minikube
+#       - build-argocd
+#   scheduled-workflow:
+#     triggers:
+#       - schedule:
+#           # cron: "0 1 * * *"
+#           # an hourly cron job but run at minute 15 instead (i.e. 00:15, 01:15, 02:15 etc.)
+#           # cron: "15 * * * *"
+#           # cron: "* * * * *" # cron job for every minute         
+#           cron: "0,15,30 * * * *" # three times every hour, at minutes 0, 15 and 30
+#           filters:
+#             branches:
+#               only: 
+#               - dev
+
+#     jobs:
+#       - build-and-test
+#       - build-minikube
+#       - build-argocd
+
+# Sequential Job 
 workflows:
   version: 2
   commit-workflow:
     jobs:
       - build-and-test
-      - build-minikube
-      - build-argocd
+      - build-minikube:
+          requires:
+          - build-minikube
   scheduled-workflow:
     triggers:
       - schedule:
@@ -63,7 +91,6 @@ workflows:
             branches:
               only: 
               - dev
-
     jobs:
       - build-and-test
       - build-minikube

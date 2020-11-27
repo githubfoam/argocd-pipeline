@@ -54,7 +54,8 @@ jobs:
           name: build golang
           command: |
             cd app/go
-            go run hello-world.go && ls -lai && ./hello-world
+            # go run hello-world.go && ls -lai && ./hello-world
+            go run main.go
 # Parallel Jobs
 workflows:
   version: 2

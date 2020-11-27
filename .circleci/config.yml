@@ -63,6 +63,7 @@ workflows:
       - build-and-test
       - build-minikube
       - build-argocd
+      - build-go
   scheduled-workflow:
     triggers:
       - schedule:
@@ -75,8 +76,8 @@ workflows:
             branches:
               only: 
               - dev
-
     jobs:
       - build-and-test
       - build-minikube
       - build-argocd
+      - build-go

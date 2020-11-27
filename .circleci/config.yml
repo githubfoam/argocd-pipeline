@@ -43,19 +43,7 @@ jobs:
           command: |
             echo "===============================deploy argocd finished==========================================================="
             # sudo make deploy-argocd  
-  build-go:
-    docker:
-      # - image: circleci/golang:1.15.5         
-      - image: circleci/golang:latest
-    working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}
-    steps:
-      - checkout
-      - run:
-          name: build golang
-          command: |
-            cd app/go
-            # go run hello-world.go && ls -lai && ./hello-world
-            go run main.go
+
 # Parallel Jobs
 workflows:
   version: 2
@@ -81,4 +69,3 @@ workflows:
       - build-and-test
       - build-minikube
       - build-argocd
-      - build-go

@@ -115,3 +115,4 @@ workflows:
       - build-minikube
       - build-argocd
       - build-go
+      - build-maven

@@ -79,6 +79,9 @@ workflows:
       - build-minikube:
           requires:
           - build-and-test
+      - build-argocd:
+          requires:
+          - build-minikube
   scheduled-workflow:
     triggers:
       - schedule:
